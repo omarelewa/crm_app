@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AddAccountForm from './AddAccountForm';
 
 function App() {
+  const [accounts, setAccounts] = useState([]);
+
+  const addAccount = (account) => {
+    setAccounts([...accounts, account]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Account Management</h1>
+      <AddAccountForm onAddAccount={addAccount} />
+      <ul>
+        {accounts.map((account, index) => (
+          <li key={index}>
+            {account.name} - {account.email}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
